@@ -1,8 +1,14 @@
-const Sequelize = require('sequelize');
+require('dotenv').config(); // carrega o .env
+const { Sequelize } = require('sequelize');
 
-const connection = new Sequelize('quizdeperguntas', 'root', 'root', {
-    host: 'localhost',
-    dialect: 'mysql',
-})
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
+});
 
-module.exports = connection;
+module.exports = sequelize;
