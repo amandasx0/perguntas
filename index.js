@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const port = process.env.PORT || 3000; 
 const bodyParser = require('body-parser');
 const connection = require('./database/database'); // Importa a conexão com o banco de dados
 const questionModel = require('./database/Question'); // Importa o modelo de Pergunta
@@ -93,6 +94,6 @@ app.post('/answer', (req, res) => {
     })
 })
 
-app.listen(3000, () => {
-    console.log('Servidor rodando na porta 3000');
+app.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
 });
