@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/header.ejs') %> <%- include('partials/nav.ejs') %>
+
+  <body>
+    <div class="container">
+      <h1 class="text-center" id="title"><%= question.title %></h1>
+      <p class="text-center"><%= question.description %></p>
+      <hr />
+      <form method="post" action="/answer">
+        <div class="form-group">
+          <label for="answer" id="label-answer">Responda</label>
+          <textarea
+            class="form-control"
+            id="answer"
+            rows="3"
+            placeholder="Digite sua resposta aqui..."
+            name="body"
+          ></textarea>
+        </div>
+        <input type="hidden" name="question" value="<%= question.id %>">
+        <button type="submit" class="btn btn-dark">Enviar Resposta</button>
+
+        <hr />
+
+        <% if (answers.length === 0) { %>
+            <h3 class="text-center">Nenhuma resposta ainda.</h3>    
+        <% } else { %>
+            <h3 class="text-center">Respostas:</h3>
+        <% } %>
+        
+        <% answers.forEach(function(answer) { %>
+          <div class="card mb-3">
+            <div class="card-body">
+              <p><%= answer.body %></p>
+              <p class="text-muted">Respondido em: <%= answer.createdAt.toLocaleString() %></p>
+            </div>
+          </div>
+        <% }); %>
+    </div>
+  </body>
+
+  <%- include('partials/scripts.ejs') %>
+</html>
